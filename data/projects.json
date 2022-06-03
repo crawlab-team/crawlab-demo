@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Web Drivers",
+    "spiders": [
+      "python/selenium_36kr"
+    ]
+  },
+  {
+    "name": "Scrapy",
+    "spiders": [
+      "python/scrapy_baidu",
+      "python/scrapy_quotes"
+    ]
+  },
+  {
+    "name": "General Python",
+    "spiders": [
+      "python/basic"
+    ]
+  }
+]
