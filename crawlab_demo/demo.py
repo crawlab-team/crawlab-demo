@@ -1,9 +1,11 @@
+import importlib.resources
 import json
+import os.path
 import random
+import tempfile
 from typing import List, Dict
 
-from pkg_resources import resource_stream
-
+import pkg_resources
 from crawlab.client import http_put, http_get, http_post, http_delete
 from crawlab.actions.upload import upload_dir
 
@@ -13,12 +15,48 @@ from crawlab_demo.models.schedule import Schedule
 from crawlab_demo.models.token import Token
 from crawlab_demo.models.user import User
 
+DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
+
 
 class Demo(object):
     _demo: DemoModel = None
+    _spiders_dir: str = tempfile.mkdtemp()
+    _pkg_name = 'crawlab_demo'
+    _pkg_spiders_path = 'data/spiders'
 
     def __init__(self):
-        self._demo = DemoModel(json.load(resource_stream(__name__, 'data/demo.json')))
+        # read demo.json
+        with importlib.resources.open_text('crawlab_demo.data', 'demo.json') as f:
+            data = json.loads(f.read())
+            self._demo = DemoModel(data)
+
+        # copy spiders
+        self._copy_dir()
+
+        # set spiders directory path
+        for i, p in enumerate(self.projects):
+            for j, s in enumerate(p.spiders):
+                spider_dir_path = os.path.join(self._spiders_dir, f'data/spiders/{s.path}')
+                self._demo['projects'][i]['spiders'][j]['_dir_path'] = spider_dir_path
+
+    def _copy_dir(self, dir_path: str = None):
+        if dir_path is None:
+            dir_path = self._pkg_spiders_path
+        for filename in pkg_resources.resource_listdir(self._pkg_name, dir_path):
+            file_path = os.path.join(dir_path, filename)
+            if pkg_resources.resource_isdir(self._pkg_name, file_path):
+                self._copy_dir(file_path)
+            else:
+                self._copy_file(file_path)
+
+    def _copy_file(self, file_path: str):
+        target_file_path = os.path.join(self._spiders_dir, file_path)
+        target_dir_path = os.path.dirname(target_file_path)
+        if not os.path.exists(target_dir_path):
+            os.makedirs(target_dir_path)
+        with pkg_resources.resource_stream(self._pkg_name, file_path) as f_in:
+            with open(target_file_path, 'wb') as f_out:
+                f_out.write(f_in.read())
 
     @property
     def projects(self) -> List[Project]:
@@ -53,6 +91,7 @@ class Demo(object):
     def import_spiders(self):
         for p in self.projects:
             for s in p.spiders:
+                print(s.dir_path)
                 upload_dir(s.dir_path)
 
     def import_schedules(self):

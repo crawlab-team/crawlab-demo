@@ -1,0 +1,33 @@
+name: Upload Python Package
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          cd _ext/python
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          pip install -r requirements.txt
+
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          cd _ext/python
+          python setup.py sdist bdist_wheel
+          pip install twine
+          twine upload dist/* | true

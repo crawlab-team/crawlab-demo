@@ -24,7 +24,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=install_requires,
-    package_data={
-        'crawlab_demo': ['*'],
-    },
+    include_package_data=True,
+    entry_points={
+        'console_scripts': [
+            'crawlab-demo=crawlab_demo.cli.main:main'
+        ]
+    }
 )
