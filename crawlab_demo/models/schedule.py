@@ -14,3 +14,7 @@ class Schedule(dict):
     @property
     def enabled(self) -> bool:
         return self.get('enabled')
+
+    @property
+    def mode(self) -> str:
+        return self.get('mode')

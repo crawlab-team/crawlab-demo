@@ -68,6 +68,7 @@ class Demo(object):
                         'cron': sch.cron,
                         'enabled': sch.enabled,
                         'spider_id': sid,
+                        'mode': sch.mode,
                     })
 
     def link_projects_spiders(self):
