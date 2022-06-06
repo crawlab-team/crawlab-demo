@@ -1,4 +1,5 @@
 import json
+import random
 from typing import List, Dict
 
 from pkg_resources import resource_stream
@@ -127,6 +128,17 @@ class Demo(object):
                 # update
                 http_post(f'/spiders/{sid}', spider)
 
+    @staticmethod
+    def run_spiders():
+        res = http_get('/spiders', {'all': True})
+        data = res.json().get('data')
+        for s in data:
+            sid = s.get('_id')
+            http_post(f'/spiders/{sid}/run', {
+                'priority': random.randint(1, 10),
+                'mode': s.get('mode'),
+            })
+
     def import_all(self):
         # import
         self.import_projects()
@@ -137,6 +149,13 @@ class Demo(object):
 
         # link
         self.link_projects_spiders()
+
+        # action
+        self.run_spiders()
+
+    def reimport_all(self):
+        self.cleanup_all()
+        self.import_all()
 
     @staticmethod
     def cleanup_all():

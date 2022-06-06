@@ -1,5 +1,6 @@
 {
   "name": "Scrapy Baidu",
   "description": "Scrapy spider to crawl Baidu search results of keyword \"crawlab\"",
-  "cmd": "scrapy crawl baidu"
+  "cmd": "scrapy crawl baidu",
+  "mode": "all-nodes"
 }

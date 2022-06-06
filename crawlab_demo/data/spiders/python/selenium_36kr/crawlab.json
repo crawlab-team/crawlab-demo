@@ -1,5 +1,6 @@
 {
   "name": "Selenium 36kr",
   "description": "Selenium spider to crawl news on 36kr.com",
-  "cmd": "python main.py"
+  "cmd": "python main.py",
+  "mode": "random"
 }
