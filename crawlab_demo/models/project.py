@@ -1,5 +1,7 @@
 from typing import List
 
+from crawlab_demo.models.spider import Spider
+
 
 class Project(dict):
     @property
@@ -11,5 +13,5 @@ class Project(dict):
         return self.get('description')
 
     @property
-    def spiders(self) -> List[str]:
-        return self.get('spiders')
+    def spiders(self) -> List[Spider]:
+        return list(map(lambda s: Spider(s), self.get('spiders')))

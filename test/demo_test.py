@@ -29,14 +29,11 @@ class DemoTestCase(unittest.TestCase):
         assert len(data) > 0
         spiders_dict = {s.get('name'): s for s in data}
         for p in self.demo.projects:
-            for s_path in p.spiders:
-                spider_path = os.path.join(os.path.dirname(__file__), f'../../crawlab_demo/data/spiders/{s_path}')
-                spider_path = os.path.abspath(spider_path)
-                spider_config = get_spider_config(spider_path)
-                spider_remote = spiders_dict.get(spider_config.name)
+            for s in p.spiders:
+                spider_remote = spiders_dict.get(s.name)
                 assert spider_remote is not None
-                assert spider_remote.get('name') == spider_config.name
-                assert spider_remote.get('description') == spider_config.description
+                assert spider_remote.get('name') == s.name
+                assert spider_remote.get('description') == s.description
 
     def test_link_projects_spiders(self):
         self.demo.import_projects()
@@ -49,24 +46,32 @@ class DemoTestCase(unittest.TestCase):
             project_spiders = projects_dict.get(p.name).get('spiders')
             assert len(p.spiders) == project_spiders
 
-    @staticmethod
-    def _delete_all():
-        # delete projects
-        res = http_get('/projects', {'all': True})
-        data: List[Dict] = res.json().get('data')
-        for p in data:
-            _id = p.get('_id')
-            http_delete(f'/projects/{_id}')
-
-        # delete spiders
+    def test_import_schedules(self):
+        self.demo.import_spiders()
+        self.demo.import_schedules()
         res = http_get('/spiders', {'all': True})
         data: List[Dict] = res.json().get('data')
-        for s in data:
-            _id = s.get('_id')
-            http_delete(f'/spiders/{_id}')
+        spiders_dict = {s.get('name'): s for s in data}
+        res = http_get('/schedules', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        schedules_dict = {sch.get('name'): sch for sch in data}
+        for p in self.demo.projects:
+            for s in p.spiders:
+                if s.schedules is None:
+                    continue
+                for sch in s.schedules:
+                    schedule_remote = schedules_dict.get(sch.name)
+                    assert schedule_remote is not None
+                    assert schedule_remote.get('name') == sch.name
+                    assert schedule_remote.get('description') == sch.description
+                    assert schedule_remote.get('cron') == sch.cron
+                    assert schedule_remote.get('enabled') == sch.enabled
+                    spider_remote = spiders_dict.get(s.name)
+                    assert spider_remote is not None
+                    assert spider_remote.get('_id') == spider_remote.get('_id')
 
     def tearDown(self) -> None:
-        self._delete_all()
+        self.demo.cleanup_all()
 
 
 if __name__ == '__main__':

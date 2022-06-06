@@ -1,0 +1,53 @@
+{
+  "projects": [
+    {
+      "name": "Browser Spiders",
+      "description": "Spiders that crawl data with web drivers such as selenium",
+      "spiders": [
+        {
+          "path": "python/selenium_36kr",
+          "schedules": [
+            {
+              "name": "36kr Daily",
+              "description": "Crawl news articles on 36kr everyday 2 AM",
+              "cron": "0 2 * * *",
+              "enabled": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Scrapy Spiders",
+      "description": "Spiders that crawl data with Scrapy framework",
+      "spiders": [
+        {
+          "path": "python/scrapy_baidu",
+          "schedules": [
+            {
+              "name": "Baidu Hourly",
+              "description": "Crawl Baidu search results for keyword 'crawlab' every hour",
+              "cron": "0 * * * *",
+              "enabled": false
+            }
+          ]
+        },
+        {
+          "path": "python/scrapy_quotes"
+        }
+      ]
+    },
+    {
+      "name": "General Spiders",
+      "description": "Spiders that crawl data with general implementation",
+      "spiders": [
+        {
+          "path": "python/basic"
+        },
+        {
+          "path": "golang/basic"
+        }
+      ]
+    }
+  ]
+}
