@@ -1,0 +1,5 @@
+{
+  "name": "Scrapy Quotes",
+  "description": "Scrapy spider to crawl data on web crawler playground site quotes.toscrape.com",
+  "cmd": "scrapy crawl quotes"
+}

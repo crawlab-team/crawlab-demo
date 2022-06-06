@@ -1,0 +1,30 @@
+from setuptools import setup, find_packages
+
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
+with open('requirements.txt', 'r') as f:
+    install_requires = f.read().split('\n')
+
+setup(
+    name='crawlab-demo',
+    version='0.0.1',
+    packages=find_packages(),
+    url='https://github.com/crawlab-team/crawlab-demo',
+    license='BSD-3-Clause',
+    author='tikazyq',
+    author_email='tikazyq@163.com',
+    description='Demo for Crawlab',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    scripts=[],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+    ],
+    install_requires=install_requires,
+    package_data={
+        'crawlab_demo': ['*'],
+    },
+)

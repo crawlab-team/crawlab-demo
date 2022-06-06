@@ -1,0 +1,5 @@
+{
+  "name": "Python Basic",
+  "description": "Python spider with basic configuration",
+  "cmd": "python main.py"
+}
