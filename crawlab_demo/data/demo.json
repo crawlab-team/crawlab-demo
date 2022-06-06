@@ -71,5 +71,13 @@
       "role": "normal",
       "email": "beta@crawlab.cn"
     }
+  ],
+  "tokens": [
+    {
+      "name": "3rd Party API Token"
+    },
+    {
+      "name": "System Integration API Token"
+    }
   ]
 }

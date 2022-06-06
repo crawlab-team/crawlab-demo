@@ -9,6 +9,7 @@ from crawlab.actions.upload import upload_dir
 from crawlab_demo.models.demo import DemoModel
 from crawlab_demo.models.project import Project
 from crawlab_demo.models.schedule import Schedule
+from crawlab_demo.models.token import Token
 from crawlab_demo.models.user import User
 
 
@@ -25,6 +26,10 @@ class Demo(object):
     @property
     def users(self) -> List[User]:
         return self._demo.users
+
+    @property
+    def tokens(self) -> List[Token]:
+        return self._demo.tokens
 
     @property
     def schedules(self) -> List[Schedule]:
@@ -85,6 +90,12 @@ class Demo(object):
                 'email': u.email,
             })
 
+    def import_tokens(self):
+        for tk in self.tokens:
+            http_put('/tokens', {
+                'name': tk.name,
+            })
+
     def link_projects_spiders(self):
         # all projects dict
         res = http_get('/projects', {'all': True})
@@ -122,6 +133,7 @@ class Demo(object):
         self.import_spiders()
         self.import_schedules()
         self.import_users()
+        self.import_tokens()
 
         # link
         self.link_projects_spiders()
@@ -164,6 +176,13 @@ class Demo(object):
                 continue
             _id = d.get('_id')
             http_delete(f'/users/{_id}')
+
+        # delete tokens
+        res = http_get('/tokens', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        for d in data:
+            _id = d.get('_id')
+            http_delete(f'/tokens/{_id}')
 
 
 if __name__ == '__main__':

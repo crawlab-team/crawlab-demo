@@ -70,6 +70,26 @@ class DemoTestCase(unittest.TestCase):
                     assert spider_remote is not None
                     assert spider_remote.get('_id') == spider_remote.get('_id')
 
+    def test_import_users(self):
+        self.demo.import_users()
+        res = http_get('/users', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        assert len(data) > 0
+        usernames = list(map(lambda x: x.username, self.demo.users))
+        for u in data:
+            if u.get('username') == 'admin':
+                continue
+            assert u.get('username') in usernames
+
+    def test_import_tokens(self):
+        self.demo.import_tokens()
+        res = http_get('/tokens', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        assert len(data) > 0
+        names = list(map(lambda x: x.name, self.demo.tokens))
+        for tk in data:
+            assert tk.get('name') in names
+
     def tearDown(self) -> None:
         self.demo.cleanup_all()
 
