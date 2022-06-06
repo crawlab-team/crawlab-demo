@@ -51,5 +51,25 @@
         }
       ]
     }
+  ],
+  "users": [
+    {
+      "username": "marvin",
+      "password": "123456789",
+      "role": "admin",
+      "email": "marvin@crawlab.cn"
+    },
+    {
+      "username": "alpha",
+      "password": "123456789",
+      "role": "normal",
+      "email": "alpha@crawlab.cn"
+    },
+    {
+      "username": "beta",
+      "password": "123456789",
+      "role": "normal",
+      "email": "beta@crawlab.cn"
+    }
   ]
 }

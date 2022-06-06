@@ -9,6 +9,7 @@ from crawlab.actions.upload import upload_dir
 from crawlab_demo.models.demo import DemoModel
 from crawlab_demo.models.project import Project
 from crawlab_demo.models.schedule import Schedule
+from crawlab_demo.models.user import User
 
 
 class Demo(object):
@@ -19,7 +20,11 @@ class Demo(object):
 
     @property
     def projects(self) -> List[Project]:
-        return list(map(lambda p: Project(p), self._demo.projects))
+        return self._demo.projects
+
+    @property
+    def users(self) -> List[User]:
+        return self._demo.users
 
     @property
     def schedules(self) -> List[Schedule]:
@@ -71,6 +76,15 @@ class Demo(object):
                         'mode': sch.mode,
                     })
 
+    def import_users(self):
+        for u in self.users:
+            http_put('/users', {
+                'username': u.username,
+                'password': u.password,
+                'role': u.role,
+                'email': u.email,
+            })
+
     def link_projects_spiders(self):
         # all projects dict
         res = http_get('/projects', {'all': True})
@@ -103,10 +117,14 @@ class Demo(object):
                 http_post(f'/spiders/{sid}', spider)
 
     def import_all(self):
+        # import
         self.import_projects()
         self.import_spiders()
-        self.link_projects_spiders()
         self.import_schedules()
+        self.import_users()
+
+        # link
+        self.link_projects_spiders()
 
     @staticmethod
     def cleanup_all():
@@ -130,6 +148,22 @@ class Demo(object):
         for d in data:
             _id = d.get('_id')
             http_delete(f'/schedules/{_id}')
+
+        # delete tasks
+        res = http_get('/tasks', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        for d in data:
+            _id = d.get('_id')
+            http_delete(f'/tasks/{_id}')
+
+        # delete users
+        res = http_get('/users', {'all': True})
+        data: List[Dict] = res.json().get('data')
+        for d in data:
+            if d.get('username') == 'admin':
+                continue
+            _id = d.get('_id')
+            http_delete(f'/users/{_id}')
 
 
 if __name__ == '__main__':
