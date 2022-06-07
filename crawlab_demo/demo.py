@@ -26,8 +26,8 @@ class Demo(object):
 
     def __init__(self):
         # read demo.json
-        with importlib.resources.open_text('crawlab_demo.data', 'demo.json') as f:
-            data = json.loads(f.read())
+        with pkg_resources.resource_stream(self._pkg_name, 'data/demo.json') as f:
+            data = json.load(f)
             self._demo = DemoModel(data)
 
         # copy spiders
