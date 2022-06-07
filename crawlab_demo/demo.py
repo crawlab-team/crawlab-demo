@@ -91,7 +91,6 @@ class Demo(object):
     def import_spiders(self):
         for p in self.projects:
             for s in p.spiders:
-                print(s.dir_path)
                 upload_dir(s.dir_path)
 
     def import_schedules(self):
