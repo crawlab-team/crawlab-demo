@@ -23,6 +23,9 @@ def main():
         reimport_demo()
     elif args.action == 'cleanup':
         cleanup()
+    else:
+        print(f'unknown action: {args.action}')
+        root_parser.print_help()
 
 
 if __name__ == '__main__':
