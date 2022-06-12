@@ -2,6 +2,7 @@ import os
 import unittest
 from typing import List, Dict
 
+from crawlab.actions.login import login
 from crawlab.client import http_get
 
 from crawlab_demo.demo import Demo
@@ -10,9 +11,9 @@ from crawlab_demo.demo import Demo
 class DemoTestCase(unittest.TestCase):
     demo = Demo()
 
-    # def setUp(self) -> None:
-    #     api_address = os.environ.get('CRAWLAB_API_ADDRESS') or 'http://localhost:8080/api'
-    #     login(api_address=api_address, username='admin', password='admin')
+    def setUp(self) -> None:
+        api_address = os.environ.get('CRAWLAB_API_ADDRESS') or 'http://localhost:8080/api'
+        login(api_address=api_address, username='admin', password='admin')
 
     def test_import_projects(self):
         self.demo.import_projects()
