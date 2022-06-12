@@ -63,7 +63,7 @@ jobs:
           res=`curl https://pypi.org/project/${{ env.PACKAGE_NAME }}/${version}/ -i -s | head -n 1`
           if [[ $res =~ 404 ]]; then
             echo "is_matched=1" >> $GITHUB_ENV 
-          else:
+          else
             :
           fi
 
