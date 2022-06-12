@@ -15,6 +15,9 @@ class DemoTestCase(unittest.TestCase):
         api_address = os.environ.get('CRAWLAB_API_ADDRESS') or 'http://localhost:8080/api'
         login(api_address=api_address, username='admin', password='admin')
 
+    def tearDown(self) -> None:
+        self.demo.cleanup_all()
+
     def test_import_projects(self):
         self.demo.import_projects()
         res = http_get('/projects', {'all': True})
@@ -93,9 +96,6 @@ class DemoTestCase(unittest.TestCase):
         names = list(map(lambda x: x.name, self.demo.tokens))
         for tk in data:
             assert tk.get('name') in names
-
-    def tearDown(self) -> None:
-        self.demo.cleanup_all()
 
 
 if __name__ == '__main__':
