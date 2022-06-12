@@ -3,6 +3,16 @@ name: Upload Python Package
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      crawlab_image_tag:
+        required: true
+        description: crawlabteam/crawlab:<tag>
+        type: choice
+        default: latest
+        options:
+          - latest
+          - develop
 
 env:
   PACKAGE_NAME: crawlab-demo
@@ -12,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       master:
-        image: crawlabteam/crawlab
+        image: crawlabteam/crawlab:${{ inputs.crawlab_image_tag }}
         env:
           CRAWLAB_NODE_MASTER: Y
           CRAWLAB_MONGO_HOST: mongo
