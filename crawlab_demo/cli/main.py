@@ -3,6 +3,7 @@ import argparse
 from crawlab_demo.actions.cleanup import cleanup
 from crawlab_demo.actions.import_demo import import_demo
 from crawlab_demo.actions.reimport_demo import reimport_demo
+from crawlab_demo.actions.validate import validate
 
 root_parser = argparse.ArgumentParser(description='CLI tool for Crawlab Demo')
 
@@ -24,6 +25,8 @@ def main():
         reimport_demo()
     elif args.action == 'cleanup':
         cleanup()
+    elif args.action == 'test':
+        validate()
     else:
         print(f'unknown action: {args.action}')
         root_parser.print_help()
