@@ -2,9 +2,7 @@ import os
 import unittest
 from typing import List, Dict
 
-from crawlab.actions.login import login
-from crawlab.client import http_get, http_delete
-from crawlab.config import get_spider_config
+from crawlab.client import http_get
 
 from crawlab_demo.demo import Demo
 

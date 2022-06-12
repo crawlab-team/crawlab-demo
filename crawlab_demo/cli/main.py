@@ -17,6 +17,7 @@ root_parser.add_argument('--password', '-p', help='Password for logging in Crawl
 
 def main():
     args = root_parser.parse_args()
+
     if args.action == 'import':
         import_demo()
     elif args.action == 'reimport':
