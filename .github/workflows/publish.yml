@@ -53,7 +53,7 @@ jobs:
           python setup.py install
           for a in import cleanup reimport; do
             crawlab-demo $a -a http://localhost:8080/api
-          fi
+          done
 
       - name: Check version
         run: |
