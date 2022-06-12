@@ -5,11 +5,11 @@ on:
     branches: [ main ]
   workflow_dispatch:
     inputs:
-      crawlab_image_tag:
+      crawlabImageTag:
+        description: 'crawlabteam/crawlab:<tag>'
         required: true
-        description: crawlabteam/crawlab:<tag>
+        default: 'latest'
         type: choice
-        default: latest
         options:
           - latest
           - develop
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       master:
-        image: crawlabteam/crawlab:${{ inputs.crawlab_image_tag }}
+        image: crawlabteam/crawlab:${{ inputs.crawlabImageTag || 'latest' }}
         env:
           CRAWLAB_NODE_MASTER: Y
           CRAWLAB_MONGO_HOST: mongo
