@@ -1,5 +1,7 @@
 import argparse
 
+from crawlab.actions.login import login
+
 from crawlab_demo.actions.cleanup import cleanup
 from crawlab_demo.actions.import_demo import import_demo
 from crawlab_demo.actions.reimport_demo import reimport_demo
@@ -18,6 +20,9 @@ root_parser.add_argument('--password', '-p', help='Password for logging in Crawl
 
 def main():
     args = root_parser.parse_args()
+
+    if args.api_address is not None or args.username is not None or args.password is not None:
+        login(args.api_address, args.username, args.password)
 
     if args.action == 'import':
         import_demo()
