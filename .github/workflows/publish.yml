@@ -51,7 +51,8 @@ jobs:
       - name: CLI Test
         run: |
           python setup.py install
-          for a in cleanup reimport import; do
+          for a in import reimport; do
+            crawlab-demo cleanup -a http://localhost:8080/api
             crawlab-demo $a -a http://localhost:8080/api
           done
 
