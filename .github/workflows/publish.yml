@@ -71,6 +71,6 @@ jobs:
           twine upload dist/*
 
   build-image-crawlab-base:
-    name: 'Build Image: crawlab-base'
+    name: 'Build crawlab-base'
     uses: crawlab-team/docker-base-images/.github/workflows/crawlab-base.yml@main
     needs: [ publish ]
