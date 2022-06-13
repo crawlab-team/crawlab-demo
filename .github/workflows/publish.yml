@@ -18,7 +18,8 @@ env:
   PACKAGE_NAME: crawlab-demo
 
 jobs:
-  deploy:
+  publish:
+    name: Publish Package
     runs-on: ubuntu-latest
     services:
       master:
@@ -68,3 +69,8 @@ jobs:
           python setup.py sdist bdist_wheel
           pip install twine
           twine upload dist/*
+
+  build-image-crawlab-base:
+    name: 'Build Image: crawlab-base'
+    uses: crawlab-team/public-base-images/.github/workflows/crawlab-base.yml@main
+    needs: [ publish ]
