@@ -12,9 +12,9 @@ class DemoTestCase(unittest.TestCase):
     demo = Demo()
 
     def setUp(self) -> None:
-        self.demo.cleanup_all()
         api_address = os.environ.get('CRAWLAB_API_ADDRESS') or 'http://localhost:8080/api'
         login(api_address=api_address, username='admin', password='admin')
+        self.demo.cleanup_all()
 
     def tearDown(self) -> None:
         self.demo.cleanup_all()
