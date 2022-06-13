@@ -72,5 +72,5 @@ jobs:
 
   build-image-crawlab-base:
     name: 'Build Image: crawlab-base'
-    uses: crawlab-team/public-base-images/.github/workflows/crawlab-base.yml@main
+    uses: crawlab-team/docker-base-images/.github/workflows/crawlab-base.yml@main
     needs: [ publish ]
