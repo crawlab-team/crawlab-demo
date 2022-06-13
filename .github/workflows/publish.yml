@@ -71,6 +71,8 @@ jobs:
           twine upload dist/*
 
   build-image-crawlab-base:
+    needs: [ publish ]
     name: 'Build crawlab-base'
     uses: crawlab-team/docker-base-images/.github/workflows/crawlab-base.yml@main
-    needs: [ publish ]
+    with:
+      forceTrigger: true
