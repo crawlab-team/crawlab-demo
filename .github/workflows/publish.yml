@@ -48,14 +48,6 @@ jobs:
         run: |
           python -m unittest crawlab_demo.test
 
-      - name: CLI Test
-        run: |
-          python setup.py install
-          for a in import reimport; do
-            crawlab-demo cleanup -a http://localhost:8080/api
-            crawlab-demo $a -a http://localhost:8080/api
-          done
-
       - name: Check version
         run: |
           version=`python setup.py --version`
