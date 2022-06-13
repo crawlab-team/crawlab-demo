@@ -1,0 +1,5 @@
+{
+  "name": "Rod GitHub Trending",
+  "description": "Spider to crawl GitHub trending repos with Golang Rod framework",
+  "cmd": "go run main.go"
+}

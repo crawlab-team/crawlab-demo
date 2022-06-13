@@ -1,0 +1,5 @@
+{
+  "name": "Colly Scrapy Resources",
+  "description": "Spider to crawl docs on docs.scrapy.org/en/latest/ with Golang Colly framework",
+  "cmd": "go run main.go"
+}

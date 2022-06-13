@@ -1,9 +1,12 @@
 {
   "projects": [
     {
-      "name": "Browser Spiders",
-      "description": "Spiders that crawl data with web drivers such as selenium",
+      "name": "Python Spiders",
+      "description": "Spiders that crawl data with Python frameworks",
       "spiders": [
+        {
+          "path": "python/basic"
+        },
         {
           "path": "python/selenium_36kr",
           "schedules": [
@@ -15,13 +18,7 @@
               "mode": "random"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Scrapy Spiders",
-      "description": "Spiders that crawl data with Scrapy framework",
-      "spiders": [
+        },
         {
           "path": "python/scrapy_baidu",
           "schedules": [
@@ -35,19 +32,31 @@
           ]
         },
         {
-          "path": "python/scrapy_quotes"
+          "path": "python/scrapy_quotes",
+          "schedules": [
+            {
+              "name": "Quotes Bi-Hourly",
+              "description": "Crawl quotes.toscrape.com every 2 hours",
+              "cron": "0 */2 * * *",
+              "enabled": true,
+              "mode": "random"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "General Spiders",
-      "description": "Spiders that crawl data with general implementation",
+      "name": "Golang Spiders",
+      "description": "Spiders that crawl data with Golang frameworks",
       "spiders": [
         {
-          "path": "python/basic"
+          "path": "golang/basic"
         },
         {
-          "path": "golang/basic"
+          "path": "golang/colly_scrapy_docs"
+        },
+        {
+          "path": "golang/rod_github"
         }
       ]
     }
