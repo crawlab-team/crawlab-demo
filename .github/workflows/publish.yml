@@ -69,3 +69,11 @@ jobs:
           python setup.py sdist bdist_wheel
           pip install twine
           twine upload dist/*
+
+      - name: Trigger other workflows
+        if: ${{ env.is_matched == '1' }}
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
+          repository: crawlab-team/docker-base-images
+          event-type: crawlab-base
