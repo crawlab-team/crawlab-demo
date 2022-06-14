@@ -30,7 +30,7 @@ def main():
         reimport_demo()
     elif args.action == 'cleanup':
         cleanup()
-    elif args.action == 'test':
+    elif args.action == 'validate':
         validate()
     else:
         print(f'unknown action: {args.action}')
