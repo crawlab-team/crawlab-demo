@@ -1,4 +1,3 @@
-import importlib.resources
 import json
 import os.path
 import random
@@ -83,7 +82,7 @@ class Demo(object):
 
     def import_projects(self):
         for p in self.projects:
-            http_put('/projects', {
+            http_post('/projects', {
                 'name': p.name,
                 'description': p.description,
             })
@@ -111,7 +110,7 @@ class Demo(object):
 
                 # iterate schedules
                 for sch in s.schedules:
-                    http_put(f'/schedules', {
+                    http_post(f'/schedules', {
                         'name': sch.name,
                         'description': sch.description,
                         'cron': sch.cron,
@@ -122,7 +121,7 @@ class Demo(object):
 
     def import_users(self):
         for u in self.users:
-            http_put('/users', {
+            http_post('/users', {
                 'username': u.username,
                 'password': u.password,
                 'role': u.role,
@@ -131,7 +130,7 @@ class Demo(object):
 
     def import_tokens(self):
         for tk in self.tokens:
-            http_put('/tokens', {
+            http_post('/tokens', {
                 'name': tk.name,
             })
 
@@ -164,7 +163,7 @@ class Demo(object):
                 spider['project_id'] = pid
 
                 # update
-                http_post(f'/spiders/{sid}', spider)
+                http_put(f'/spiders/{sid}', spider)
 
     @staticmethod
     def run_spiders():
