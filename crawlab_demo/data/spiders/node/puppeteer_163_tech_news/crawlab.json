@@ -1,0 +1,5 @@
+{
+  "name": "网易技术新闻",
+  "description": "抓取网易技术新闻的 Puppeteer 爬虫",
+  "cmd": "node main.js"
+}

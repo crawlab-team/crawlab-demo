@@ -42,6 +42,18 @@
               "mode": "random"
             }
           ]
+        },
+        {
+          "path": "python/playwright_bing",
+          "schedules": [
+            {
+              "name": "Bing Daily",
+              "description": "Crawl Bing search results for keyword 'crawlab' everyday 2 AM",
+              "cron": "0 2 * * *",
+              "enabled": true,
+              "mode": "all-nodes"
+            }
+          ]
         }
       ]
     },
@@ -57,6 +69,27 @@
         },
         {
           "path": "golang/rod_github"
+        }
+      ]
+    },
+    {
+      "name": "Node.js Spiders",
+      "description": "Spiders that crawl data with Node.js frameworks",
+      "spiders": [
+        {
+          "path": "node/basic"
+        },
+        {
+          "path": "node/puppeteer_163_tech_news",
+          "schedules": [
+            {
+              "name": "163 Tech News Daily",
+              "description": "Crawl news.163.com tech news everyday",
+              "cron": "0 2 * * *",
+              "enabled": true,
+              "mode": "random"
+            }
+          ]
         }
       ]
     }

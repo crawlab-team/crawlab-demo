@@ -1,3 +1,4 @@
 crawlab-sdk>=0.6.0
 selenium==4.2.0
 scrapy==2.6.1
+playwright==1.27.1

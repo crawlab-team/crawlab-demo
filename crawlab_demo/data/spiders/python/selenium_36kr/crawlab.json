@@ -1,6 +1,6 @@
 {
-  "name": "Selenium 36kr",
-  "description": "Selenium spider to crawl news on 36kr.com",
+  "name": "Selenium 36kr 爬虫",
+  "description": "抓取 36kr.com 新闻的 Selenium 爬虫",
   "cmd": "python main.py",
   "mode": "random"
 }

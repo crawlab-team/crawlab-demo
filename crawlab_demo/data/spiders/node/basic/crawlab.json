@@ -1,0 +1,5 @@
+{
+  "name": "Node.js Basic Spider | Node.js 基础爬虫",
+  "description": "Node.js spider with basic configuration | 基础配置的 Node.js 爬虫",
+  "cmd": "node main.js"
+}

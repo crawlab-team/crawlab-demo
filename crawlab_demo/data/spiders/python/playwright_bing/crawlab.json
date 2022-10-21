@@ -1,0 +1,5 @@
+{
+  "name": "必应（Bing）Playwright 爬虫",
+  "description": "必应（Bing）Playwright 爬虫",
+  "cmd": "python main.py"
+}
