@@ -45,9 +45,9 @@ jobs:
           pip install setuptools wheel
           pip install -r requirements.txt
 
-      - name: Unit Test
-        run: |
-          python -m unittest crawlab_demo.test
+#      - name: Unit Test
+#        run: |
+#          python -m unittest crawlab_demo.test
 
       - name: Check version
         run: |
