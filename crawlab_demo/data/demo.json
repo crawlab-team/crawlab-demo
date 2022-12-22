@@ -54,6 +54,18 @@
               "mode": "all-nodes"
             }
           ]
+        },
+        {
+          "path": "python/bookdepository"
+        },
+        {
+          "path": "python/github_search"
+        },
+        {
+          "path": "python/hackernews"
+        },
+        {
+          "path": "python/hsph"
         }
       ]
     },

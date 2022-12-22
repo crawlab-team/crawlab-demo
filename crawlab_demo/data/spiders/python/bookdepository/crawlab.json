@@ -1,0 +1,5 @@
+{
+  "name": "Book Depository",
+  "description": "Scrapy spider to crawlab bookdepository.com",
+  "cmd": "scrapy crawl books"
+}
