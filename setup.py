@@ -8,7 +8,7 @@ with open('requirements.txt', 'r') as f:
 
 setup(
     name='crawlab-demo',
-    version='0.0.6-10',
+    version='0.0.6-11',
     packages=find_packages(),
     url='https://github.com/crawlab-team/crawlab-demo',
     license='BSD-3-Clause',
