@@ -2,6 +2,8 @@ const {saveItem} = require('crawlab-sdk')
 const puppeteer = require('puppeteer');
 
 async function parse(page) {
+    console.log(`parsing ${page.url()}`);
+
     // Wait for the results page to load and display the results.
     const resultsSelector = '.newsList > li';
     await page.waitForSelector(resultsSelector);
@@ -21,7 +23,7 @@ async function parse(page) {
 
     // Print all the files.
     for (let item of items) {
-        console.log(item);
+        // console.log(item);
         await saveItem(item);
     }
 }
@@ -42,9 +44,13 @@ async function run() {
         // parse page
         await parse(page);
 
-        if (await page.evaluate(() => document.querySelector('a.pages_flip:last-child'))) {
-            // next page
-            await page.click('a.pages_flip');
+        // next page
+        const res = await page.evaluate(() => document.querySelector('a.pages_flip:last-child'));
+
+        if (res) {
+            // go to next page
+            await page.click('a.pages_flip:last-child');
+            await new Promise(resolve => setTimeout(resolve, 5000));
         } else {
             // last page
             break;
